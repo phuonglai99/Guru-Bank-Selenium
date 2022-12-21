@@ -49,7 +49,17 @@ public class AllureReport extends BaseTest implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+        Object testClass = iTestResult.getInstance();
+        WebDriver driver = ((BaseTest) testClass).getDriver();
 
+        //Allure ScreenShotRobot and SaveTestLog
+        if (driver != null) {
+            System.out.println("Screenshot captured for test case:" + getTestMethodName(iTestResult));
+            saveScreenshotPNG(driver);
+        }
+
+        //Save a log on allure.
+        saveTextLog(getTestMethodName(iTestResult) + " passed and screenshot taken!");
     }
 
     @Override
@@ -74,11 +84,31 @@ public class AllureReport extends BaseTest implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
+        Object testClass = iTestResult.getInstance();
+        WebDriver driver = ((BaseTest) testClass).getDriver();
 
+        //Allure ScreenShotRobot and SaveTestLog
+        if (driver != null) {
+            System.out.println("Screenshot captured for test case:" + getTestMethodName(iTestResult));
+            saveScreenshotPNG(driver);
+        }
+
+        //Save a log on allure.
+        saveTextLog(getTestMethodName(iTestResult) + " failed and screenshot taken!");
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+        Object testClass = iTestResult.getInstance();
+        WebDriver driver = ((BaseTest) testClass).getDriver();
 
+        //Allure ScreenShotRobot and SaveTestLog
+        if (driver != null) {
+            System.out.println("Screenshot captured for test case:" + getTestMethodName(iTestResult));
+            saveScreenshotPNG(driver);
+        }
+
+        //Save a log on allure.
+        saveTextLog(getTestMethodName(iTestResult) + " passed and screenshot taken!");
     }
 }

@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage extends BaseClass {
     private By mangerId = By.xpath("//*[contains(text(),'Manger Id :')]");
-    String url = "";
+    private By buttonLogout = By.linkText("Log out");
+    private By changePassword = By.linkText("Change Password");
+    private String url = "https://www.demo.guru99.com/V4/manager/Logout.php";
 
 
     public HomePage(WebDriver driver) {
@@ -13,9 +15,19 @@ public class HomePage extends BaseClass {
     }
 
 
-    public String getMangerID(){
+    public String getMangerID() {
         String text = getText(mangerId);
         //System.out.println("text la "+ text)
         return text;
     }
+
+    public void clickButtonChangePassword() {
+        scrollToVisitElement(changePassword);
+        clickOnElement(changePassword);
+    }
+
+    public String getEpectedUrl() {
+        return this.url;
+    }
+
 }

@@ -27,7 +27,7 @@ public class Login extends BaseTest{
 
     @DataProvider(name = "valid_data_login")
     public Object[][] dataValid() {
-        Object data[][] = new Object[][]{{"mngr457633", "tusUdab", "mngr45763"}};
+        Object data[][] = new Object[][]{{"mngr463566", "baterEp", "mngr463566"}};
         return data;
     }
 

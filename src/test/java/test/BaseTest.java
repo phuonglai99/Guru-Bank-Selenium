@@ -6,6 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pom.ChangePassword;
 import pom.HomePage;
 import pom.Login;
 
@@ -14,6 +15,7 @@ public class BaseTest {
     public WebDriver driver;
     public Login login;
     public HomePage home;
+    public ChangePassword changePass;
 
     public WebDriver getDriver() {
         return driver;
@@ -29,10 +31,12 @@ public class BaseTest {
     void init(){
         login = new Login(driver);
         home = new HomePage(driver);
+        changePass = new ChangePassword(driver);
+
     }
 
-    @AfterClass
-    public void teardown() {
-        driver.quit();
-    }
+//    @AfterClass
+//    public void teardown() {
+//        driver.quit();
+//    }
 }

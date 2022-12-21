@@ -1,11 +1,20 @@
 package test;
 
+import CommonMethod.AllureReport;
+import org.openqa.selenium.By;
+import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-public class HomePage extends BaseTest{
+@Listeners({AllureReport.class})
+public class HomePage extends BaseTest {
 
     @Test
-    void compareText(){
-
+    void testClickLogout() {
+        login.loginWithAccount("mngr463566", "baterEp");
+        //home.clickButtonLogout();
+        Assert.assertEquals(home.getEpectedUrl(),home.getCurrentUrl());
+        //driver.findElement(By.linkText("New Customer")).click();
     }
+
 }

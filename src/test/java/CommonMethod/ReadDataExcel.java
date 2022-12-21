@@ -16,7 +16,7 @@ public class ReadDataExcel {
     public static final String SHEET_NAME = "Data"; // Sheet name
     public static final String TABLE_NAME = "testData"; // Name of data table
     public static String[][] readData(String filePath, String sheetName) throws IOException {
-        FileInputStream file = new FileInputStream(new File(filePath));
+        FileInputStream file = new FileInputStream(filePath);
         HSSFWorkbook workbook = new HSSFWorkbook(file);
         HSSFSheet sheet = workbook.getSheet(sheetName);
         int row = sheet.getLastRowNum();
