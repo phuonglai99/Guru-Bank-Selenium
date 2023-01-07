@@ -3,6 +3,7 @@ package pom;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class Login extends BaseClass{
     private By userId = By.name("uid");
@@ -10,8 +11,8 @@ public class Login extends BaseClass{
     private By buttonReset = By.name("btnReset");
     private By buttonLogin = By.name("btnLogin");
     private String url = "https://www.demo.guru99.com/V4/";
-    private String expectLoginSucess = "https://www.demo.guru99.com/V4/manager/Managerhomepage.php";
-    private String expectLoginFail = "User or Password is not valid";
+    private String expectUrlLoginSucess = "https://www.demo.guru99.com/V4/manager/Managerhomepage.php";
+    private String expectedTextLoginFail = "User or Password is not valid";
 
 
     public Login(WebDriver driver) {
@@ -23,11 +24,11 @@ public class Login extends BaseClass{
     }
 
     public String getExpectLoginSucess() {
-        return expectLoginSucess;
+        return expectUrlLoginSucess;
     }
 
     public String getExpectLoginFail() {
-        return expectLoginFail;
+        return expectedTextLoginFail;
     }
 
     @Step("Clear old text in textarea")
@@ -46,25 +47,21 @@ public class Login extends BaseClass{
         clickOnElement(buttonLogin);
     }
 
-    @Step("get current url after login")
-    public String getCurrentUrl() {
-        return driver.getCurrentUrl();
-    }
-
-    @Step("Check open popup alert after login with invalid account")
-    public String showPopupErrorMsg() {
-        waitVisibilityAlert();
-        String ret = driver.switchTo().alert().getText();
-        driver.switchTo().alert().accept();
-        return ret;
-    }
-
     @Step("Login with account has username {0} and password is {1}")
     public void loginWithAccount(String username, String pass) {
         openPage();
         clickOnReset();
         fillInFormLogin(username, pass);
         clickOnLogin();
+    }
+
+    public void verifyLoginSuccessfully(String mangerId){
+        Assert.assertEquals(getCurrentUrl(), expectUrlLoginSucess);
+        Assert.assertEquals(new HomePage(driver).getMangerID(), "Manger Id : " + mangerId);
+    }
+
+    public void verifyLoginFailed(){
+        Assert.assertEquals(showPopupErrorMsg(), expectedTextLoginFail);
     }
 
 }

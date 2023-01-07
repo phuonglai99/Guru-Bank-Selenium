@@ -27,7 +27,7 @@ public class Login extends BaseTest{
 
     @DataProvider(name = "valid_data_login")
     public Object[][] dataValid() {
-        Object data[][] = new Object[][]{{"mngr463566", "baterEp", "mngr463566"}};
+        Object data[][] = new Object[][]{{"mngr463566", "123456@", "mngr463566"}};
         return data;
     }
 
@@ -36,9 +36,7 @@ public class Login extends BaseTest{
     @Severity(SeverityLevel.BLOCKER)
     void loginWithValidAccount(String username, String pass, String mangerId) throws IOException {
         login.loginWithAccount(username, pass);
-        Assert.assertEquals(login.getCurrentUrl(), login.getExpectLoginSucess());
-        Assert.assertEquals(home.getMangerID(), "Manger Id : " + mangerId);
-        //TakeCapture.takeScreenShot(driver);
+        login.verifyLoginSuccessfully(mangerId);
     }
     @Test(dataProvider = "invalid_data_login")
     void loginWithInvalidAcount(String username, String pass) throws IOException {
@@ -46,7 +44,7 @@ public class Login extends BaseTest{
         login.clickOnReset();
         login.fillInFormLogin(username, pass);
         login.clickOnLogin();
-        Assert.assertEquals(login.showPopupErrorMsg(), login.getExpectLoginFail());
+        login.verifyLoginFailed();
     }
 
     @Test

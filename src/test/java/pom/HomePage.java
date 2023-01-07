@@ -17,7 +17,6 @@ public class HomePage extends BaseClass {
 
     public String getMangerID() {
         String text = getText(mangerId);
-        //System.out.println("text la "+ text)
         return text;
     }
 

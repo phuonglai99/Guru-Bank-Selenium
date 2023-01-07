@@ -48,6 +48,9 @@ public class BaseClass {
     public String getCurrentUrl(){
         return driver.getCurrentUrl();
     }
+    public boolean waitURLToBe(String url){
+        return wait.until(ExpectedConditions.urlToBe(url));
+    }
     public String showPopupErrorMsg() {
         waitVisibilityAlert();
         String ret = driver.switchTo().alert().getText();
@@ -55,10 +58,9 @@ public class BaseClass {
         return ret;
     }
     public void closeAd(By iframe,By buttonclose) {
-
         if (driver.findElements(iframe).size() > 0) {
             System.out.println(driver.switchTo().frame(waitVisibilityElement(iframe)));
-            System.out.println("has a iframe");
+            System.out.println("Has a iframe");
             waitVisibilityElement(buttonclose).click();
             driver.switchTo().parentFrame();
         }

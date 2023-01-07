@@ -2,6 +2,7 @@ package pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 public class ChangePassword extends BaseClass{
     public ChangePassword(WebDriver driver) {
@@ -13,8 +14,10 @@ public class ChangePassword extends BaseClass{
     private By confirmPassField = By.name("confirmpassword");
     private By buttonSubmit = By.name("sub");
     private By buttonReset = By.name("res");
-private By iframe = By.cssSelector("iframe[id^='google_ads_iframe_']");
+    private By iframe = By.cssSelector("iframe[id^='google_ads_iframe_']");
     private By buttonCloseAd = By.id("dismiss-button");
+    private String expectedTextInSuccessfulPopup = "Password is Changed";
+    private String urlLogin = "https://www.demo.guru99.com/V4/index.php";
 
     public void submitFormChangePassword(String oldPass,String newPass,String confirmPass){
         closeAd(iframe,buttonCloseAd);
@@ -23,9 +26,10 @@ private By iframe = By.cssSelector("iframe[id^='google_ads_iframe_']");
         typeText(newPassField,newPass);
         typeText(confirmPassField,confirmPass);
         clickOnElement(buttonSubmit);
-
     }
-
-
+    public void verifyChangePassSuccess(){
+        Assert.assertEquals(showPopupErrorMsg(),expectedTextInSuccessfulPopup);
+        Assert.assertEquals(waitURLToBe(urlLogin),true);
+    }
 
 }
