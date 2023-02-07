@@ -10,6 +10,7 @@ public class Login extends BaseClass{
     private By password = By.name("password");
     private By buttonReset = By.name("btnReset");
     private By buttonLogin = By.name("btnLogin");
+    private By linkToSubmitEmailPage = By.linkText("here");
     private String url = "https://www.demo.guru99.com/V4/";
     private String expectUrlLoginSucess = "https://www.demo.guru99.com/V4/manager/Managerhomepage.php";
     private String expectedTextLoginFail = "User or Password is not valid";
@@ -54,6 +55,10 @@ public class Login extends BaseClass{
         fillInFormLogin(username, pass);
         clickOnLogin();
     }
+    public void openPageSubmitEmail(){
+        scrollToVisitElement(linkToSubmitEmailPage);
+        clickOnElement(linkToSubmitEmailPage);
+    }
 
     public void verifyLoginSuccessfully(String mangerId){
         Assert.assertEquals(getCurrentUrl(), expectUrlLoginSucess);
@@ -63,5 +68,6 @@ public class Login extends BaseClass{
     public void verifyLoginFailed(){
         Assert.assertEquals(showPopupErrorMsg(), expectedTextLoginFail);
     }
+
 
 }
