@@ -67,7 +67,6 @@ public class BaseClass {
         else {
             System.out.println("No ads anymore");
         }
-
     }
 
 }

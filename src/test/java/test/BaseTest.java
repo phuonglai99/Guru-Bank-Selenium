@@ -6,7 +6,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pom.*;
 import pom.ChangePassword;
+import pom.GetAccountLogin;
 import pom.HomePage;
 import pom.Login;
 
@@ -16,6 +18,9 @@ public class BaseTest {
     public Login login;
     public HomePage home;
     public ChangePassword changePass;
+    public PopupAds popupAds;
+    public EnterYourEmail enterYourEmail;
+    public pom.GetAccountLogin getAccountLogin;
 
     public WebDriver getDriver() {
         return driver;
@@ -32,7 +37,9 @@ public class BaseTest {
         login = new Login(driver);
         home = new HomePage(driver);
         changePass = new ChangePassword(driver);
-
+        popupAds = new PopupAds(driver);
+        enterYourEmail = new EnterYourEmail(driver);
+        getAccountLogin = new GetAccountLogin(driver);
     }
 
     @AfterClass
